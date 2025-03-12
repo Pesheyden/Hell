@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public bool IsGamePlaying;
 
+    [SerializeField] private float _speedMultiplier = 1.1f;
+    [SerializeField] private float _enemiesReviveTime = 2;
+    [SerializeField] private GameObject _deathParticlesPrefab;
+
     private void Awake()
     {
         if (Instance)
@@ -35,6 +39,16 @@ public class GameManager : MonoBehaviour
 
     public void EnemyDeath(GameObject enemy)
     {
+        PlayerController.Instance.MultiplyMovementForce(_speedMultiplier);
+        enemy.SetActive(false);
+        var particles = Instantiate(_deathParticlesPrefab, enemy.transform.position, Quaternion.identity);
+        StartCoroutine(EnemyDeathCoroutine(enemy, particles));
+    }
 
+    private IEnumerator EnemyDeathCoroutine(GameObject enemy, GameObject particles)
+    {
+        yield return new WaitForSeconds(_enemiesReviveTime);
+        enemy.SetActive(true);
+        Destroy(particles);
     }
 }

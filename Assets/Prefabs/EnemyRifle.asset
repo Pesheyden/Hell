@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93705e7bb8979f469f82ba732c4260f, type: 3}
+  m_Name: EnemyRifle
+  m_EditorClassIdentifier: 
+  Damage: 20
+  MagazineSize: 200000
+  AreMagazinesUnlimited: 1
+  MagazinesStartAmount: 0
+  MagazinesMaxAmount: 0
+  TimeBetweenShots: 1
+  ReloadTime: 3
+  ShootInputMode: 0
+  BulletPrefab: {fileID: 9043635875533843993, guid: 45a63fe4f16408943a6625f08da97b0f, type: 3}
+  BulletForce: 50
+  CanBulletRicochet: 0
+  BulletRicochetDamageReduction: 0.2
+  RicochetMaxAmount: 2

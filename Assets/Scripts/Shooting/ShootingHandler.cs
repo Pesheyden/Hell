@@ -68,7 +68,7 @@ public class ShootingHandler : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        int bulletsToCreate = (int)(_weapon.MagazineSize / _weapon.TimeBetweenShots * 2);
+        int bulletsToCreate = (int)Mathf.Clamp(_weapon.MagazineSize / _weapon.TimeBetweenShots * 2, 10, 100) ;
 
         for (int i = 0; i < bulletsToCreate; i++)
         {

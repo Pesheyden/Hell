@@ -17,6 +17,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _magazinesValueText;
     [SerializeField] private GameObject _gameEndUiContainer;
     [SerializeField] private TextMeshProUGUI _gameEndScoreText;
+    [SerializeField] private Slider _speedSlider;
 
     private void Awake()
     {
@@ -31,32 +32,34 @@ public class GameUIManager : MonoBehaviour
 
     public void SetUpHealthSlider(int maxValue)
     {
-        _healthSlider.maxValue = maxValue;
-        _healthSlider.value = maxValue;
+        //_healthSlider.maxValue = maxValue;
+        //_healthSlider.value = maxValue;
     }
 
     public void UpdateHealthSliderValue(float newValue)
     {
-        _healthSlider.value = newValue;
+        //_healthSlider.value = newValue;
     }
 
     public void UpdateScoreTextValues(string newValue)
     {
-        _scoreValueText.text = newValue;
+        //_scoreValueText.text = newValue;
     }
 
     public void UpdateBulletsText(string newValue)
     {
-        _bulletsValueText.text = newValue;
+        //_bulletsValueText.text = newValue;
     }
     public void UpdateMagazinesText(string newValue)
     {
-        _magazinesValueText.text = newValue;
+        //_magazinesValueText.text = newValue;
     }
 
     public void ActivateGameEndUI(string score)
     {
-        _gameEndUiContainer.SetActive(true);
-        _gameEndScoreText.text += score;
+        //_gameEndUiContainer.SetActive(true);
+        //_gameEndScoreText.text += score;
     }
+
+    public void UpdateSpeedSlider(float newValue) => _speedSlider.value = newValue;
 }

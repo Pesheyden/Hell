@@ -11,9 +11,14 @@ public class PlayerMovementHandler : MonoBehaviour
 {
     #region Movement Settings
 
+    [SerializeField] private SpeedLinesAlphaMap _speedLinesAlphaMap;
+
     [Header("Movement")]
     [Tooltip("How fast player will accelerate")]
-    [SerializeField] private float _basicMovementForce = 10f;
+    [SerializeField] private float _basicMovementForce = 400;
+
+    [SerializeField] private float _maxMovementForce = 2500;
+    [SerializeField] private float _slowBack = 10;
 
     [Tooltip("How strongly player will jump")]
     [SerializeField] private float _jumpForce = 8f;
@@ -96,6 +101,19 @@ public class PlayerMovementHandler : MonoBehaviour
         }
 
         #endregion
+
+        StartCoroutine(SlowBackCoroutine());
+    }
+
+    private IEnumerator SlowBackCoroutine()
+    {
+        while (true)
+        {
+            _basicMovementForce -= _slowBack;
+            _movementForce -= _slowBack;
+            GameUIManager.Instance.UpdateSpeedSlider(_basicMovementForce);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     /// <summary>
@@ -130,6 +148,8 @@ public class PlayerMovementHandler : MonoBehaviour
     public void MovementHandler(Vector2 input)
     {
         if (!_isCanMove) return;
+
+        _speedLinesAlphaMap.value = _movementForce / _maxMovementForce;
 
         if (_isSliding)
             HandleSlidingMovement(input);
@@ -296,5 +316,10 @@ public class PlayerMovementHandler : MonoBehaviour
 
     #endregion
 
-    public void MultiplyMovementForce(float multiplier) => _movementForce *= multiplier;
+    public void MultiplyMovementForce(float multiplier)
+    {
+        _movementForce *= multiplier;
+        _basicMovementForce *= multiplier;
+        GameUIManager.Instance.UpdateSpeedSlider(_basicMovementForce);
+    }
 }

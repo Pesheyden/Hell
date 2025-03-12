@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public HealthSystem HealthSystem;
     [HideInInspector] public ShootingHandler ShootingHandler;
     public PlayerCameraHandler PlayerCameraHandler;
-    [HideInInspector] public PlayerMovementHandler PlayerMovementHandler;
+    [HideInInspector] public PlayerMovementHandler MovementHandler;
 
     private bool _isDisabled;
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         HealthSystem = GetComponent<HealthSystem>();
-        PlayerMovementHandler = GetComponent<PlayerMovementHandler>();
+        MovementHandler = GetComponent<PlayerMovementHandler>();
         ShootingHandler = GetComponent<ShootingHandler>();
     }
 
@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
             return;
         
         PlayerCameraHandler.HandleRotation();
-        PlayerMovementHandler.MovementHandler(PlayerInput.Instance.MovementInput);
-        PlayerMovementHandler.HandleGravity();
+        MovementHandler.MovementHandler(PlayerInput.Instance.MovementInput);
+        MovementHandler.HandleGravity();
     }
 
     public void Disable()
@@ -68,4 +68,6 @@ public class PlayerController : MonoBehaviour
     {
         ShootingHandler.AddMagazines(amount);
     }
+
+    public void MultiplyMovementForce(float multiplier) => MovementHandler.MultiplyMovementForce(multiplier);
 }
