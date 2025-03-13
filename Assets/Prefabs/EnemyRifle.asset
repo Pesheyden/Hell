@@ -17,11 +17,11 @@ MonoBehaviour:
   AreMagazinesUnlimited: 1
   MagazinesStartAmount: 0
   MagazinesMaxAmount: 0
-  TimeBetweenShots: 1
+  TimeBetweenShots: 0.5
   ReloadTime: 3
   ShootInputMode: 0
   BulletPrefab: {fileID: 9043635875533843993, guid: 45a63fe4f16408943a6625f08da97b0f, type: 3}
-  BulletForce: 50
+  BulletForce: 80
   CanBulletRicochet: 0
   BulletRicochetDamageReduction: 0.2
   RicochetMaxAmount: 2

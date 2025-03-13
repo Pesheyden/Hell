@@ -61,6 +61,7 @@ public class PlayerMovementHandler : MonoBehaviour
     private bool _isCrouching;
     private bool _isCanMove;
     private bool _isSliding;
+    private bool _isFirstGravityHandle;
 
     #region Unity Callbacks
 
@@ -197,11 +198,18 @@ public class PlayerMovementHandler : MonoBehaviour
     public void HandleGravity()
     {
         _currentGravityForce = _rigidbody.linearVelocity;
-
         if (IsGrounded())
+        {
+            _isFirstGravityHandle = true;
             _currentGravityForce.y = 0f;
+        }
         else if (!IsJumping())
-            _currentGravityForce.y += Physics.gravity.y * Time.fixedDeltaTime;
+        {
+            if (_isFirstGravityHandle)
+                _currentGravityForce.y += Physics.gravity.y * Time.fixedDeltaTime;
+            _currentGravityForce.y *= 1 + (-Physics.gravity.y * Time.fixedDeltaTime / 2); 
+        }
+            
 
         _rigidbody.linearVelocity = _currentGravityForce;
     }
@@ -320,6 +328,10 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         _movementForce *= multiplier;
         _basicMovementForce *= multiplier;
+        if (_basicMovementForce > _maxMovementForce)
+            _basicMovementForce = _maxMovementForce;        
+        if (_movementForce > _maxMovementForce)
+            _movementForce = _maxMovementForce;
         GameUIManager.Instance.UpdateSpeedSlider(_basicMovementForce);
     }
 }
